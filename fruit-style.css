@@ -4,6 +4,10 @@
 	box-sizing: border-box;
 }
 
+:hover {
+	cursor: crosshair;
+}
+
 body {
 	background: linear-gradient(
 		90deg,
