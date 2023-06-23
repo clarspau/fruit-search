@@ -86,7 +86,7 @@ const fruit = [
 function search(str) {
 	const results = [];
 	fruit.filter((val) =>
-		val.toLowerCase().includes(str) ? results.push(val) : null
+		val.toLowerCase().includes(str) ? results.push(val) : undefined
 	);
 	return results;
 }
