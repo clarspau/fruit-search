@@ -1,3 +1,4 @@
+// ! Previous code prior the Live Code Review
 // to access the input box
 const input = document.querySelector("#fruit");
 // to access the ul
@@ -87,29 +88,45 @@ const fruit = [
 
 // this will be for the search function that will be compared with the fruits array
 function search(str) {
-	return fruit.filter((val) => val.toLowerCase().includes(str));
+	// results  is an empty array for the suggestions
+	const results = [];
+	// this should filter the fruit array if the string is included in any of the fruits. if not, it'll be undfined.
+	// must also convert it to lowercase.
+	fruit.filter((val) =>
+		val.toLowerCase().includes(str) ? results.push(val) : undefined
+	);
+	return results;
 }
 
 //
 function searchHandler(e) {
+	// text entered must be converted to lowercase too.
 	const inputVal = e.target.value.toLowerCase();
+	// now, we need to compare the input value with the suggestion. if it finds matches, show the suggestions, if not, it'll be an empty text.
 	const results = search(inputVal);
 	inputVal ? showSuggestions(results) : (suggestions.innerText = "");
 }
 
 // this should show the suggestions based on the input value.
 function showSuggestions(results) {
+	// start with an empty text
 	suggestions.innerText = "";
-	for (let i = 0; i < results.length; i++) {
-		const newLi = document.createElement("li");
-		newLi.innerText = results[i];
-		suggestions.appendChild(newLi);
+	if (results.length > 0) {
+		// create a loop that will compare the input value with the fruits array.
+		// if a match was found, create an "li" and and append an li for all matches found.
+		for (let i = 0; i < results.length; i++) {
+			const newLi = document.createElement("li");
+			newLi.innerText = results[i];
+			suggestions.appendChild(newLi);
+		}
 	}
 }
 
 // Need to populate the search bar with what the user clicked on the suggested list.
 function useSuggestion(e) {
-	input.value = e.target.innerText;
+	fruitVal = e.target.innerText;
+	input.value = fruitVal;
+	// after clicking, suggestions should be empty again.
 	suggestions.innerText = "";
 }
 
